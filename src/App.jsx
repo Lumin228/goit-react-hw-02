@@ -1,35 +1,39 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState } from "react";
+import { Description } from "./Description/Description";
+import { Options } from "./Options/Options";
+import { Feedback } from "./Feedback/Feedback";
 function App() {
-  const [count, setCount] = useState(0)
+  const [table, setTable] = useState({ good: 0, neutural: 0, bad: 0 });
+
+  const updataGood = () => {
+    setTable({
+      ...table,
+      good: table.good + 1,
+    });
+  };
+
+  const updataNeutural = () => {
+    setTable({
+      ...table,
+      neutural: table.neutural + 1,
+    });
+  };
+
+  const updataBad = () => {
+    setTable({
+      ...table,
+      bad: table.bad + 1,
+    });
+  };
+
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div style={{ padding: "30px", marginTop: "0" }}>
+      <Description />
+      <Options updteG={updataGood} updteN={updataNeutural} updteB={updataBad} result={table}/>
+      <Feedback good={table.good} neutural={table.neutural} bad={table.bad} />
+    </div>
+  );
 }
 
-export default App
+export default App;
