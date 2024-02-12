@@ -16,24 +16,10 @@ function App() {
     localStorage.setItem(LOCAL_KEY, JSON.stringify(table));
   }, [table]);
 
-  const updataGood = () => {
+  const update = (type) => {
     setTable(prevState => ({
       ...prevState,
-      good: prevState.good + 1,
-    }));
-  };
-
-  const updataNeutural = () => {
-    setTable(prevState => ({
-      ...prevState,
-      neutural: prevState.neutural + 1,
-    }));
-  };
-
-  const updataBad = () => {
-    setTable(prevState => ({
-      ...prevState,
-      bad: prevState.bad + 1,
+      [type]: prevState[type] + 1,
     }));
   };
 
@@ -44,7 +30,7 @@ function App() {
   return (
     <div style={{ padding: "30px", marginTop: "0" }}>
       <Description />
-      <Options updteG={updataGood} updteN={updataNeutural} updteB={updataBad} result={table} updteR={updataReset}/>
+      <Options updat={update} result={table} updteR={updataReset}/>
       <Feedback good={table.good} neutural={table.neutural} bad={table.bad} />
     </div>
   );
