@@ -63,7 +63,6 @@ function App() {
     localStorage.setItem(NEUTRAL, 0)
     localStorage.setItem(GOOD, 0)
   };
-  console.log(clicks);
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
   return (
     <>
