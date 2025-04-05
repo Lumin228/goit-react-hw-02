@@ -12,7 +12,7 @@ export const Feedback = ({clicks, feedback}) => {
             <p>Neutural: {neutral}</p>
             <p>Bad: {bad}</p>
             <p className={clsx({ [css.isHidden]: feedback === 0 })}>Total: {feedback}</p>
-            <p className={clsx({ [css.isHidden]: Positive === 0 || isNaN(Positive)})}>Positive: {Positive}%</p>
+            <p className={clsx({ [css.isHidden]: feedback === 0 })}>Positive: {Positive}%</p>
         </div>
     )
 }
