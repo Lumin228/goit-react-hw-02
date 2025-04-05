@@ -3,36 +3,30 @@ import { Descrtiption } from '../Description/Description'
 import { Options } from '../Options/Options'
 import css from './App.module.css'
 import { Feedback } from '../Feedback/Feedback'
+import { Notification } from "../Feedback/Notification";
 
 function App() {
-  const GOOD = 'good'
-  const NEUTRAL = 'neutral'
-  const BAD = 'bad'
+  const FEEDBACK_KEY = 'Feedback'
 
-  const [clicks, setClicks] = useState({
-    good: 0,
-    neutral: 0,
-    bad: 0,
+  const [clicks, setClicks] = useState(() => {
+    try {
+      const { good = 0, neutral = 0, bad = 0 } = JSON.parse(localStorage.getItem('Feedback')) || {};
+      return { good, neutral, bad };
+    } catch {
+      return { good: 0, neutral: 0, bad: 0 };
+    }
   });
-  // good: localStorage.getItem(GOOD), neutral: localStorage.getItem(NEUTRAL), bad: localStorage.getItem(BAD)
-  useEffect(() => {
-    const savedGood = localStorage.getItem(GOOD);
-    const savedNeutral = localStorage.getItem(NEUTRAL);
-    const savedBad = localStorage.getItem(BAD);
 
-    setClicks({
-      good: savedGood ? Number(savedGood) : 0, // Преобразуем строку в число
-      neutral: savedNeutral ? Number(savedNeutral) : 0,
-      bad: savedBad ? Number(savedBad) : 0,
-    });
-  }, []);
+  useEffect(() => {
+    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(clicks));
+
+  }, [clicks]);
 
   const clickGood = () =>{
     setClicks({
       ...clicks, 
       good: clicks.good + 1,
   })
-    localStorage.setItem(GOOD, clicks.good + 1)
   }
   
   const clickNeutral = () =>{
@@ -40,7 +34,6 @@ function App() {
       ...clicks, 
       neutral: clicks.neutral + 1,
   })
-  localStorage.setItem(NEUTRAL, clicks.neutral + 1)
   }
 
 
@@ -49,7 +42,6 @@ function App() {
       ...clicks, 
       bad: clicks.bad + 1,
   })
-  localStorage.setItem(BAD, clicks.bad + 1)
   }
 
 
@@ -59,11 +51,11 @@ function App() {
       neutral: 0,
       bad: 0,
     });
-    localStorage.setItem(BAD, 0);
-    localStorage.setItem(NEUTRAL, 0)
-    localStorage.setItem(GOOD, 0)
   };
   const totalFeedback = clicks.good + clicks.neutral + clicks.bad;
+
+  const Positive = Math.round((clicks.good  / totalFeedback) * 100);
+
   return (
     <>
      <div className={css.totalBlock}>
@@ -73,7 +65,7 @@ function App() {
         clickNeutral={clickNeutral}
         resetFeedback={resetFeedback}
         feedback={totalFeedback}/>
-        <Feedback clicks={clicks} feedback={totalFeedback}/>
+        {totalFeedback == 0 ? <Notification/> : <Feedback clicks={clicks} feedback={totalFeedback} positivity={Positive}/>}
      </div>
     </>
   )
