@@ -1,0 +1,8 @@
+.totalBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px 0 10px 10px;
+  border: 1px solid orangered;
+  border-radius: 5px;
+}

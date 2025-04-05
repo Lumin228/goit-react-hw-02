@@ -1,0 +1,8 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 1px solid blue;
+    align-items: flex-start;
+    padding-left: 20px;
+}

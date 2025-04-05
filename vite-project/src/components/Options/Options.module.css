@@ -1,0 +1,11 @@
+.block {
+    display: flex;
+  border: 2px solid magenta; /* рамка вокруг всех кнопок */
+  border-radius: 8px;
+  padding: 5px;
+  gap: 8px;
+}
+
+.isHidden{
+  display: none;
+}
