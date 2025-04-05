@@ -1,4 +1,4 @@
-import css from '../Feedback/Feedback.module.css'
+import css from './Feedback.module.css'
 import clsx from 'clsx'
 
 

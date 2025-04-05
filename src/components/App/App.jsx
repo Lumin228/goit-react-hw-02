@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Descrtiption } from '../Description/Description'
 import { Options } from '../Options/Options'
-import css from '../App/App.module.css'
+import css from './App.module.css'
 import { Feedback } from '../Feedback/Feedback'
 
 function App() {
