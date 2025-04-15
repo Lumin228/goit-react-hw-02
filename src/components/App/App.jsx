@@ -22,25 +22,10 @@ function App() {
 
   }, [clicks]);
 
-  const clickGood = () =>{
+  const click = (evt) =>{
     setClicks({
       ...clicks, 
-      good: clicks.good + 1,
-  })
-  }
-  
-  const clickNeutral = () =>{
-    setClicks({
-      ...clicks, 
-      neutral: clicks.neutral + 1,
-  })
-  }
-
-
-  const clickBad = () =>{
-    setClicks({
-      ...clicks, 
-      bad: clicks.bad + 1,
+      [evt.target.id]: clicks[evt.target.id] + 1,
   })
   }
 
@@ -60,9 +45,7 @@ function App() {
     <>
      <div className={css.totalBlock}>
         <Descrtiption/>
-        <Options clickGood={clickGood}
-        clickBad={clickBad}
-        clickNeutral={clickNeutral}
+        <Options click={click}
         resetFeedback={resetFeedback}
         feedback={totalFeedback}/>
         {totalFeedback == 0 ? <Notification/> : <Feedback clicks={clicks} feedback={totalFeedback} positivity={Positive}/>}
